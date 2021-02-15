@@ -1,0 +1,22 @@
+ <div *ngIf="form; else loading">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="form-control"
+    *ngClass="{invalid:form.get('title').touched && form.get('title').invalid}"
+    >
+      <label for="author">автор поста</label>
+      <input formControlName="author" id="author" type="text">
+      <div class="validation"
+      *ngIf="form.get('author').touched && form.get('author').invalid"
+      >
+      <small  *ngIf="form.get('author').errors.required">введите автора поста </small>
+      </div>
+    </div>
+    <div class="form-control">
+      <quill-editor formControlName="text"></quill-editor>
+    </div>
+    <button class="btn btn-primary" type="submit" [disabled]="form.invalid || submitted">обновить</button>
+  </form>
+</div>
+<ng-template №loading>
+  <p class="text-center">идет загрузка</p>
+</ng-template>
